@@ -6,7 +6,6 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str
     @model_validator(mode="after")
-    @classmethod
     def validate_email(cls, values):
         username = values.username.lower()
         email = values.email.lower()
@@ -32,3 +31,4 @@ class UserOut(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
