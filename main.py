@@ -1,41 +1,27 @@
-from fastapi import FastAPI
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+
 from dotenv import load_dotenv
 import os
-
+from fastapi import FastAPI
+from app.api import auth_routes, user_routes, event_routes, category_routes, invitation_routes, attendee_routes, speaker_routes
+from app.db import base, session
 load_dotenv()
 USER_NAME = os.getenv("USER_NAME")
 # Database configuration
 DATABASE_URL = f"postgresql://joudhajal:password@localhost/gatherly"
 
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
 
-# Define a model
-class Item(Base):
-    __tablename__ = "items"
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
 
 # Create database tables
-Base.metadata.create_all(bind=engine)
+base.Base.metadata.create_all(bind=session.engine)
+app = FastAPI(title="FastAPI Event Management App")
+# Include routers
+app.include_router(auth_routes.router, prefix="/auth", tags=["auth"])
+app.include_router(user_routes.router, prefix="/users", tags=["users"])
+app.include_router(event_routes.router, prefix="/events", tags=["events"])
+app.include_router(category_routes.router, prefix="/categories", tags=["categories"])
+app.include_router(invitation_routes.router, prefix="/invitations", tags=["invitations"])
+app.include_router(attendee_routes.router, prefix="/attendees", tags=["attendees"])
+app.include_router(speaker_routes.router, prefix="/speakers", tags=["speakers"])
 
-# FastAPI setup
-app = FastAPI()
-
-# Dependency to get a DB session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-@app.get("/")
-def read_root():
-    return {"message": "Hello, PostgreSQL with FastAPI!"}
 
 

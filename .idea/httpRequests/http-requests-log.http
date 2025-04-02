@@ -1,0 +1,36 @@
+GET http://localhost:8000/users/me
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.3.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-04-01T153048-1.401.json
+
+###
+
+GET http://localhost:8000/users/me
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.3.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-04-01T153048.401.json
+
+###
+
+GET http://localhost:8000/users/me
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.3.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-04-01T153047.401.json
+
+###
+
+GET http://localhost:8000/users/me
+User-Agent: IntelliJ HTTP Client/PyCharm 2024.3.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2025-04-01T153033.401.json
+
+###
+

@@ -5,7 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6401b2b6-435d-465c-b083-3ea3e0becbf5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/attendee_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/auth_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/category_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/event_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/invitation_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/speaker_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/user_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/auth_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/event_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/utilities/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/utilities/jwt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/utilities/security.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/speakers.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/speaker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/attendee_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/attendee_schema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/event_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/event_schema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/user_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/user_schema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +57,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;FastAPI.Gatherly.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #1.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -53,7 +75,10 @@
     ]
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="FastAPI.Gatherly">
+    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="Gatherly" type="Python.FastAPI">
       <option name="file" value="$PROJECT_DIR$/main.py" />
       <module name="Gatherly" />
@@ -69,6 +94,11 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -87,14 +117,36 @@
       <option name="presentableId" value="Default" />
       <updated>1743431541377</updated>
       <workItem from="1743431542425" duration="12793000" />
-      <workItem from="1743497806281" duration="2205000" />
+      <workItem from="1743497806281" duration="16487000" />
+      <workItem from="1743580184610" duration="9538000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/api/user_routes.py</url>
+          <line>5</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/schemas/user_schema.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/api/user_routes.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Gatherly$Gatherly.coverage" NAME="Gatherly Coverage Results" MODIFIED="1743452934228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Gatherly$Gatherly.coverage" NAME="Gatherly Coverage Results" MODIFIED="1743631324375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
