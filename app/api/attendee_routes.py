@@ -18,6 +18,7 @@ def get_db():
 @router.post("/", response_model=AttendeeOut)
 def register_attendee(attendee_in: AttendeeCreate, current_user = Depends(get_current_user), db: Session = Depends(get_db)):
     event_count = db.query(Event.max_attendees).filter(Event.id == attendee_in.event_id).scalar()
+
     if not event_count:
         raise HTTPException(status_code=404, detail="Event not found")
     attendee = EventAttendee(

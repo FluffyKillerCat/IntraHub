@@ -5,28 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6401b2b6-435d-465c-b083-3ea3e0becbf5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/api/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/attendee_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/auth_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/category_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/event_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/invitation_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/speaker_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/user_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/auth_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/event_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utilities/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utilities/jwt.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utilities/security.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/organizations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/user_orgs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/schemas/organization_schema.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/event.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/speakers.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/speaker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/attendee_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/attendee_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/schemas/attendee_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/attendee_schema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/event_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/event_schema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/user_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/user_schema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +30,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;FluffyKillerCat&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/FluffyKillerCat/Gatherly.git&quot;,
+    &quot;accountId&quot;: &quot;aa08fc69-9bb1-46a5-8134-4162be6ce5ab&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -118,7 +115,8 @@
       <updated>1743431541377</updated>
       <workItem from="1743431542425" duration="12793000" />
       <workItem from="1743497806281" duration="16487000" />
-      <workItem from="1743580184610" duration="9538000" />
+      <workItem from="1743580184610" duration="12424000" />
+      <workItem from="1743669350618" duration="711000" />
     </task>
     <servers />
   </component>
@@ -143,10 +141,14 @@
           <line>52</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/models/organizations.py</url>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Gatherly$Gatherly.coverage" NAME="Gatherly Coverage Results" MODIFIED="1743631324375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Gatherly$Gatherly.coverage" NAME="Gatherly Coverage Results" MODIFIED="1743631911015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
