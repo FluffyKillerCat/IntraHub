@@ -3,9 +3,8 @@ from datetime import datetime
 
 
 class OrganizationCreate(BaseModel):
-    id: int
     name: str
-    administrator_id: int
+
 
 class OrganizationOut(BaseModel):
     name: str

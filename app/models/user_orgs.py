@@ -9,5 +9,6 @@ class UserOrgs(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=True)
+    #part_of = Column(Integer, ForeignKey('organizations.id'), nullable=True)
     date_joined = Column(DateTime, default=datetime.utcnow())
 
