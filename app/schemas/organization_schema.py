@@ -9,7 +9,7 @@ class OrganizationCreate(BaseModel):
 
 class OrganizationOut(BaseModel):
     name: str
-    joined_at: datetime
+    created_by: str
 
     class Config:
         orm_mode = True

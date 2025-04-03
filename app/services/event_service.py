@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models.event import Event
-from app.schemas.user_schema import UserOut
-from app.api.user_routes import get_current_user
+
 def create_event(db: Session, creator_id: int, event_data):
     new_event = Event(
         creator_id=creator_id,

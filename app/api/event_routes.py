@@ -29,7 +29,6 @@ def list_events(db: Session = Depends(get_db), current_user: UserOut = Depends(g
 @router.get("/{event_id}", response_model=EventOut)
 def get_event(event_id: int, db: Session = Depends(get_db), current_user: UserOut = Depends(get_current_user)):
     event = get_event_by_id(db, event_id, current_user.id)
-
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
     else:

@@ -2,15 +2,12 @@
 from dotenv import load_dotenv
 import os
 from fastapi import FastAPI
-from app.api import auth_routes, user_routes, event_routes, category_routes, invitation_routes, attendee_routes, speaker_routes
+from app.api import auth_routes, user_routes, event_routes, category_routes, invitation_routes, attendee_routes, speaker_routes, admin_routes
 from app.db import base, session
 load_dotenv()
 USER_NAME = os.getenv("USER_NAME")
 # Database configuration
 DATABASE_URL = f"postgresql://joudhajal:password@localhost/gatherly"
-
-
-
 # Create database tables
 base.Base.metadata.create_all(bind=session.engine)
 app = FastAPI(title="FastAPI Event Management App")
@@ -22,6 +19,6 @@ app.include_router(category_routes.router, prefix="/categories", tags=["categori
 app.include_router(invitation_routes.router, prefix="/invitations", tags=["invitations"])
 app.include_router(attendee_routes.router, prefix="/attendees", tags=["attendees"])
 app.include_router(speaker_routes.router, prefix="/speakers", tags=["speakers"])
-
+app.include_router(admin_routes.router, prefix="/admins", tags=["admins"])
 
 

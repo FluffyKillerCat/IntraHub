@@ -25,7 +25,7 @@ def register_attendee(attendee_in: AttendeeCreate, current_user = Depends(get_cu
         event_id=attendee_in.event_id,
         user_id=current_user.id,
         registration_mode=attendee_in.registration_mode,
-        status="approved"
+        status="pending"
     )
     if db.query(EventAttendee).filter_by(event_id=attendee.event_id).count() < event_count:
         db.add(attendee)
