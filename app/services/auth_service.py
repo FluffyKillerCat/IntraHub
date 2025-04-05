@@ -2,9 +2,11 @@ from pydantic import EmailStr
 from sqlalchemy.orm import Session
 from datetime import timedelta
 from app.models.user import User
+from app.models.user_orgs import UserOrgs
 from app.utilities.security import verify_password, get_password_hash
 from app.utilities.jwt import create_access_token
 from app.config import ACCESS_TOKEN_EXPIRE_MINUTES
+
 
 def get_user_by_username(db: Session, username: str):
     return db.query(User).filter(User.username == username).first()
@@ -23,9 +25,22 @@ def authenticate_user(db: Session, username: str, password: str):
         return None
     return user
 
-def generate_token_for_user(user):
+
+
+
+
+def generate_token_for_user(user, db):
+
+
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    user_orgs = db.query(UserOrgs.part_of, UserOrgs.is_admin).filter(UserOrgs.user_id==user.id).all()
+    orgs = {user[0]: user[1] for user in user_orgs}
+    data = {"sub": user.username, "orgs": orgs}
     token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data=data, expires_delta=access_token_expires
     )
     return token
+
+
+
+

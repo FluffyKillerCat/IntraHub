@@ -5,7 +5,7 @@ from app.schemas.user_schema import UserOut
 from app.services.event_service import create_event, get_all_events, get_event_by_id
 from app.db.session import SessionLocal
 from app.api.user_routes import get_current_user
-
+from app.dependencies.oauth2_scheme import oauth2_scheme
 router = APIRouter()
 
 def get_db():
@@ -16,8 +16,8 @@ def get_db():
         db.close()
 
 @router.post("/", response_model=EventOut)
-def create_new_event(event_in: EventCreate, current_user = Depends(get_current_user), db: Session = Depends(get_db)):
-    event = create_event(db, current_user.id, event_in)
+def create_new_event(event_in: EventCreate, current_user = Depends(get_current_user), db: Session = Depends(get_db), token = Depends(oauth2_scheme)):
+    event = create_event(db, current_user, event_in, token)
     return event
 
 @router.get("/", response_model=list[EventOut])

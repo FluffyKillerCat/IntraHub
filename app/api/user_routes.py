@@ -21,6 +21,7 @@ def get_db():
 
 # Dependency to get the current user
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    print(type(token))
     try:
         # Decode the JWT token
         payload = decode_access_token(token)
@@ -52,3 +53,9 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
 @router.get("/me", response_model=UserOut)
 def read_users_me(current_user: UserOut = Depends(get_current_user)):
     return current_user
+
+@router.get("/secure")
+def secure_endpoint(token: str = Depends(oauth2_scheme)):
+    print(token)
+    return {"token": token}
+

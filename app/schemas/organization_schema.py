@@ -7,8 +7,8 @@ class OrganizationCreate(BaseModel):
 
 
 class OrganizationOut(BaseModel):
-    name: str
-    created_by: str
+    org_name: str
+    created_id: str
 
     class Config:
         orm_mode = True

@@ -2,15 +2,14 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class UserOrgCreate(BaseModel):
-    user: int
-    org: int
+    user_id: int
+    part_of: int
 
 
 class UserOrgOut(BaseModel):
 
-    org: int
-    accepted_by: int
-    joined_on: datetime
+    user_id: int
+    part_of: int
     class Config:
         orm_mode: True
 

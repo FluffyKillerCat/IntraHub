@@ -5,15 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6401b2b6-435d-465c-b083-3ea3e0becbf5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/api/org_routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dependencies/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dependencies/oauth2_scheme.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dependencies/payload.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/token_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/organizations.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/organizations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt-4.3.0.dist-info/INSTALLER" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt-4.3.0.dist-info/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt-4.3.0.dist-info/METADATA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt-4.3.0.dist-info/RECORD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt-4.3.0.dist-info/REQUESTED" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt-4.3.0.dist-info/WHEEL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt-4.3.0.dist-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt/__init__.pyi" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt/_bcrypt.abi3.so" beforeDir="false" afterPath="$PROJECT_DIR$/.venv/lib/python3.13/site-packages/bcrypt/_bcrypt.abi3.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/auth_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/event_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/event_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/org_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/org_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/user_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/user_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/admins.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/admins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/event.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/user_orgs.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user_orgs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/event_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/event_schema.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/schemas/organization_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/organization_schema.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/schemas/user_orgs_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/user_orgs_schema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/auth_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/auth_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/event_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/event_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/services/org_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/org_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utilities/jwt.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utilities/jwt.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +141,9 @@
       <workItem from="1743497806281" duration="16487000" />
       <workItem from="1743580184610" duration="12424000" />
       <workItem from="1743669350618" duration="24672000" />
+      <workItem from="1743723807630" duration="493000" />
+      <workItem from="1743759380442" duration="13073000" />
+      <workItem from="1743846011311" duration="17274000" />
     </task>
     <servers />
   </component>
@@ -140,17 +165,21 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/api/user_routes.py</url>
-          <line>52</line>
+          <line>53</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/models/organizations.py</url>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/models/admins.py</url>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Gatherly$Gatherly.coverage" NAME="Gatherly Coverage Results" MODIFIED="1743709080909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Gatherly$Gatherly.coverage" NAME="Gatherly Coverage Results" MODIFIED="1743865356347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

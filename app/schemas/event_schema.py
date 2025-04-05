@@ -11,6 +11,7 @@ class EventCreate(BaseModel):
     start_time: time
     end_time: time
     max_attendees: int
+    org_id: int
     invitation_type: str  # 'invited' or 'ticket_request'
 
     @model_validator(mode="after")

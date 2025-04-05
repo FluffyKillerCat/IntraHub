@@ -15,5 +15,6 @@ class Event(Base):
     start_time = Column(Time, nullable=False)
     end_time = Column(Time, nullable=False)
     max_attendees = Column(Integer, nullable=False)
+    org_id = Column(Integer, ForeignKey("organizations.id"), nullable=False)
     invitation_type = Column(String(50), nullable=False, comment="e.g., 'invited' or 'ticket_request'")
     created_at = Column(DateTime, default=datetime.utcnow)
