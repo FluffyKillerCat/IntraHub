@@ -7,7 +7,7 @@ from app.db import base, session
 load_dotenv()
 USER_NAME = os.getenv("USER_NAME")
 # Database configuration
-DATABASE_URL = f"postgresql://joudhajal:password@localhost/gatherly"
+DATABASE_URL = os.getenv("DATABASE_URL")
 # Create database tables
 base.Base.metadata.create_all(bind=session.engine)
 app = FastAPI(title="FastAPI Event Management App")
