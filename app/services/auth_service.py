@@ -4,7 +4,7 @@ from datetime import timedelta
 from app.models.user import User
 from app.models.user_orgs import UserOrgs
 from app.utilities.security import verify_password, get_password_hash
-from app.utilities.jwt import create_access_token
+from app.utilities.jwt import generate_refresh_token, generate_access_token
 from app.config import ACCESS_TOKEN_EXPIRE_MINUTES
 
 
@@ -33,10 +33,25 @@ def generate_token_for_user(user, db):
 
 
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    user_orgs = db.query(UserOrgs.part_of, UserOrgs.is_admin).filter(UserOrgs.user_id==user.id).all()
+    user_orgs = db.query(UserOrgs.part_of, UserOrgs.is_admin).filter(UserOrgs.user_id==user.username).all()
     orgs = {user[0]: user[1] for user in user_orgs}
     data = {"sub": user.username, "orgs": orgs}
-    token = create_access_token(
+
+    token = generate_access_token(
+        data=data, expires_delta=access_token_expires
+    )
+    return token
+
+
+def generate_rtoken_for_user(user, db):
+
+
+    access_token_expires = timedelta(minutes=120)
+    user_orgs = db.query(UserOrgs.part_of, UserOrgs.is_admin).filter(UserOrgs.user_id==user.username).all()
+    orgs = {user[0]: user[1] for user in user_orgs}
+    data = {"sub": user.username, "orgs": orgs}
+
+    token = generate_refresh_token(
         data=data, expires_delta=access_token_expires
     )
     return token

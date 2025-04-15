@@ -5,7 +5,8 @@ from app.models.event_attendee import EventAttendee
 from app.db.session import SessionLocal
 from app.api.user_routes import get_current_user
 from app.models.event import Event
-
+from app.dependencies.oauth2_scheme import oauth2_scheme
+from app.utilities.jwt import decode_access_token
 router = APIRouter()
 
 def get_db():
@@ -16,7 +17,9 @@ def get_db():
         db.close()
 
 @router.post("/", response_model=AttendeeOut)
-def register_attendee(attendee_in: AttendeeCreate, current_user = Depends(get_current_user), db: Session = Depends(get_db)):
+def register_attendee(attendee_in: AttendeeCreate, current_user = Depends(get_current_user), db: Session = Depends(get_db), token = Depends(oauth2_scheme)):
+    payload = decode_access_token(token)
+
     event_count = db.query(Event.max_attendees).filter(Event.id == attendee_in.event_id).scalar()
 
     if not event_count:
@@ -24,8 +27,8 @@ def register_attendee(attendee_in: AttendeeCreate, current_user = Depends(get_cu
     attendee = EventAttendee(
         event_id=attendee_in.event_id,
         user_id=current_user.id,
-        registration_mode=attendee_in.registration_mode,
-        status="pending"
+        registration_mode="invited",
+        status="accepted"
     )
     if db.query(EventAttendee).filter_by(event_id=attendee.event_id).count() < event_count:
         db.add(attendee)

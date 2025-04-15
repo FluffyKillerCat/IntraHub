@@ -17,12 +17,15 @@ def get_db():
 
 @router.post("/", response_model=EventOut)
 def create_new_event(event_in: EventCreate, current_user = Depends(get_current_user), db: Session = Depends(get_db), token = Depends(oauth2_scheme)):
-    event = create_event(db, current_user, event_in, token)
-    return event
+    try:
+        event = create_event(db, current_user, event_in, token)
+        return event
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=f"{e}")
 
 @router.get("/", response_model=list[EventOut])
-def list_events(db: Session = Depends(get_db), current_user: UserOut = Depends(get_current_user)):
-    events = get_all_events(db, current_user.id)
+def list_events(db: Session = Depends(get_db), current_user: UserOut = Depends(get_current_user), token = Depends(oauth2_scheme)):
+    events = get_all_events(db, current_user.id, token)
     return events
 
 

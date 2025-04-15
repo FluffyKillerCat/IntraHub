@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class OrganizationCreate(BaseModel):
-    name: str
+    org_name: str
 
 
 class OrganizationOut(BaseModel):

@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class AttendeeCreate(BaseModel):
-    event_id: int
+    event_title: int
     user_id: int
     registration_mode: str  # "invited" or "requested"
 

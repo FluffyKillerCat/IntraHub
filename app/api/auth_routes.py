@@ -33,7 +33,12 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"}
         )
-    token = auth_service.generate_token_for_user(user, db)
-    return {"access_token": token, "token_type": "bearer"}
+    access_token = auth_service.generate_token_for_user(user, db)
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer"
+    }
+
 
 

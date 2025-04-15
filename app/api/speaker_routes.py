@@ -20,6 +20,7 @@ def add_speaker(speaker_in: SpeakerCreate, current_user = Depends(get_current_us
         event_id=speaker_in.event_id,
         name=speaker_in.name,
         bio=speaker_in.bio
+
     )
     db.add(speaker)
     db.commit()
