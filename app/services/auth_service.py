@@ -4,9 +4,9 @@ from datetime import timedelta
 from app.models.user import User
 from app.models.user_orgs import UserOrgs
 from app.utilities.security import verify_password, get_password_hash
-from app.utilities.jwt import generate_refresh_token, generate_access_token
+from app.utilities.jwt import generate_access_token, create_refresh_token
 from app.config import ACCESS_TOKEN_EXPIRE_MINUTES
-
+from app.utilities.jwt import decode_refresh_token
 
 def get_user_by_username(db: Session, username: str):
     return db.query(User).filter(User.username == username).first()
@@ -51,10 +51,12 @@ def generate_rtoken_for_user(user, db):
     orgs = {user[0]: user[1] for user in user_orgs}
     data = {"sub": user.username, "orgs": orgs}
 
-    token = generate_refresh_token(
+    token = create_refresh_token(
         data=data, expires_delta=access_token_expires
     )
     return token
+
+
 
 
 

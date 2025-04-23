@@ -34,7 +34,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     if not payload or "sub" not in payload:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid credentials"
+            detail="Invalid credentials!!!"
         )
 
     # Fetch user from database using their username (from payload)
@@ -56,6 +56,31 @@ def read_users_me(current_user: UserOut = Depends(get_current_user)):
 
 @router.get("/secure")
 def secure_endpoint(token: str = Depends(oauth2_scheme)):
-    print(token)
+
     return {"token": token}
 
+@router.delete("/users/{username}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_user_by_username(
+    username: str,
+    current_user: UserOut = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    # Optional: Prevent users from deleting others unless admin
+    if username != current_user.username:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authorized to delete this user"
+        )
+
+    user = get_user_by_username(db, username)
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+
+    db.delete(user)
+    db.commit()
+
+    return {"detail": f"User '{username}' deleted successfully"}

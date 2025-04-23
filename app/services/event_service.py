@@ -9,9 +9,7 @@ def create_event(db: Session, creator_id, event_data, token):
     from datetime import datetime
     payload = decode_access_token(token)
 
-    def calculate_status(event_date, end_time):
-        now = datetime.utcnow()
-        return (now.date() == event_date and now.time() <= end_time) or (now.date() < event_date)
+
     orgs = db.query(Organizations.org_name).all()
 
     if not any(org[0] == event_data.org_id for org in orgs):
@@ -32,7 +30,7 @@ def create_event(db: Session, creator_id, event_data, token):
                 max_attendees=event_data.max_attendees,
                 org_id = event_data.org_id,
                 invitation_type=event_data.invitation_type,
-                status = calculate_status(event_data.event_date, event_data.end_time)
+
             )
 
 
@@ -57,11 +55,20 @@ def get_all_events(db: Session, current_user, token):
     return db.query(Event).filter(Event.creator_id == current_user).all()
 
 
-def get_event_by_id(db: Session, event_id: int, current_user):
-    payload = get_current_token()
-    if payload['org'] == current_user.organization_id and payload['sub'] == current_user.username:
+def get_event_by_id(db: Session, event_id: str, current_user, token):
+    payload = decode_access_token(token)
 
 
+    for org in payload['orgs']:
+        event = db.query(Event).filter(Event.title == event_id, Event.org_id == org).first()
+        if event:
+            return event
 
 
-        return db.query(Event).filter(Event.id == event_id, Event.creator_id == current_user).first()
+def delete_event_title(db: Session, event_id: str, current_user, event, token):
+    payload = decode_access_token(token)
+
+    db.delete(event)
+    db.commit()
+    return event
+

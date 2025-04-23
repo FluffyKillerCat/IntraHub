@@ -24,7 +24,7 @@ def create_invitation(invite_in: InvitationCreate, current_user = Depends(get_cu
         inviter_id=current_user.id,
         invitee_email=invite_in.invitee_email,
         token=token,
-        status="pending"
+        status="accepted"
     )
     db.add(invitation)
     db.commit()

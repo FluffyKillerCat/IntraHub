@@ -50,10 +50,9 @@ def add_user_to(token: str, db: Session, user_org_data, admin):
     payload = decode_access_token(token)
 
 
-
-
-
     try:
+
+
         if  payload['orgs'][str(user_org_data.part_of)] is True:
 
             is_org_admin = db.query(Admins).filter(Admins.org_id == user_org_data.org, Admins.user_id == admin.id).first()

@@ -26,3 +26,24 @@ def add_speaker(speaker_in: SpeakerCreate, current_user = Depends(get_current_us
     db.commit()
     db.refresh(speaker)
     return speaker
+
+
+
+@router.delete("/speaker/{name}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_speaker_by_name(
+    name: str,
+    current_user = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    speaker = db.query(Speaker).filter(Speaker.name == name).first()
+
+    if not speaker:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Speaker with name '{name}' not found"
+        )
+
+    db.delete(speaker)
+    db.commit()
+
+    return {"detail": f"Speaker '{name}' deleted successfully"}

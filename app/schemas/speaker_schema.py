@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class SpeakerCreate(BaseModel):
-    event_id: int
+    event_id: str
     name: str
     bio: str
 
