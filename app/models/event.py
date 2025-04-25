@@ -7,7 +7,7 @@ class Event(Base):
     __tablename__ = "events"
     id = Column(Integer, primary_key=True, index=True)
     creator_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    title = Column(String(150),  nullable=False)
+    title = Column(String(150), nullable=False, unique=True)
     description = Column(Text, nullable=False)
     location = Column(String(255), nullable=False)
     event_type = Column(String(50), nullable=False)
@@ -18,7 +18,6 @@ class Event(Base):
     org_id = Column(String, ForeignKey("organizations.org_name"), nullable=False)
     invitation_type = Column(String(50), default="private", comment="e.g., 'invited' or 'ticket_request'")
     created_at = Column(DateTime, default=datetime.utcnow)
-    status = Column(Boolean)
 
     @hybrid_property
     def status(self):
