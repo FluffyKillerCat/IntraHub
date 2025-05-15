@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class InvitationCreate(BaseModel):
-    event_id: int
+    event_id: str
     invitee_email: str
 
 class InvitationOut(BaseModel):

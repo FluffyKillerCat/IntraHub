@@ -8,8 +8,8 @@ class AttendeeCreate(BaseModel):
 
 class AttendeeOut(BaseModel):
     id: int
-    event_id: int
-    user_id: int
+    event_id: str
+    user_id: str
     registration_mode: str
     status: str
     registered_at: datetime

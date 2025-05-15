@@ -7,7 +7,7 @@ class Invitation(Base):
     __tablename__ = "invitations"
 
     id = Column(Integer, primary_key=True, index=True)
-    event_id = Column(Integer, ForeignKey("events.id"), nullable=False)
+    event_id = Column(String, ForeignKey("events.title"), nullable=False)
     inviter_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     invitee_email = Column(String(100), nullable=False)
     token = Column(String(255), unique=True, nullable=False)

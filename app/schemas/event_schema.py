@@ -29,18 +29,11 @@ class EventCreate(BaseModel):
 
 
 class EventOut(BaseModel):
-    id: int
-    creator_id: int
+
     title: str
-    description: str
-    location: str
-    event_type: str
-    event_date: date
-    start_time: time
-    end_time: time
-    max_attendees: int
-    invitation_type: str
-    created_at: datetime
+
+
+
 
     class Config:
         orm_mode = True

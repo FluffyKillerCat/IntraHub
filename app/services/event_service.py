@@ -1,12 +1,12 @@
 from app.models.event import Event
 from sqlalchemy.orm import Session
 from app.models.organizations import Organizations
-
+from app.models.event_attendee import EventAttendee
 from app.services.token_service import get_current_token
 
 from app.utilities.jwt import decode_access_token
 def create_event(db: Session, creator_id, event_data, token):
-    from datetime import datetime
+
     payload = decode_access_token(token)
 
 
@@ -40,9 +40,9 @@ def create_event(db: Session, creator_id, event_data, token):
             db.refresh(new_event)
             return new_event
         else:
-            return None
+            raise ValueError("Only Admins can make events")
     except Exception:
-        return None
+        raise ValueError("Only Admins can make events")
 
 
 
@@ -50,9 +50,15 @@ def create_event(db: Session, creator_id, event_data, token):
 
 def get_all_events(db: Session, current_user, token):
     payload = decode_access_token(token)
-    orgs  = list(payload['orgs'].keys())
-    print(orgs)
-    return db.query(Event).filter(Event.creator_id == current_user).all()
+    orgs = list(payload['orgs'].keys())
+
+    # Query events associated with the organizations
+    event_ids_subquery = db.query(Event.id).filter(Event.org_id.in_(orgs)).scalar_subquery()
+
+    # Query users registered for those events
+    registered_users = db.query(EventAttendee.user_id).filter(EventAttendee.event_id.in_(event_ids_subquery)).all()
+
+    return registered_users
 
 
 def get_event_by_id(db: Session, event_id: str, current_user, token):
