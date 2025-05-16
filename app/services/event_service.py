@@ -2,6 +2,7 @@ from app.models.event import Event
 from sqlalchemy.orm import Session
 from app.models.organizations import Organizations
 from app.models.event_attendee import EventAttendee
+from app.models.user_orgs import UserOrgs
 from app.services.token_service import get_current_token
 
 from app.utilities.jwt import decode_access_token
@@ -10,14 +11,15 @@ def create_event(db: Session, creator_id, event_data, token):
     payload = decode_access_token(token)
 
 
-    orgs = db.query(Organizations.org_name).all()
+    orgs = db.query(UserOrgs.part_of, UserOrgs.is_admin).filter(UserOrgs.user_id == creator_id.username).all()
+    orgs = {org[0]: org[1] for org in orgs}
 
     if not any(org[0] == event_data.org_id for org in orgs):
         raise ValueError("Org not found")
 
     try:
 
-        if event_data.org_id in payload['orgs'] and payload['orgs'][event_data.org_id] is True:
+        if orgs[event_data.org_id] is True :
             new_event = Event(
                 creator_id=creator_id.id,
                 title=event_data.title,
@@ -41,24 +43,34 @@ def create_event(db: Session, creator_id, event_data, token):
             return new_event
         else:
             raise ValueError("Only Admins can make events")
-    except Exception:
-        raise ValueError("Only Admins can make events")
+    except Exception as e:
+        raise ValueError(f"{e}")
 
 
 
 
 
 def get_all_events(db: Session, current_user, token):
-    payload = decode_access_token(token)
-    orgs = list(payload['orgs'].keys())
+    #payload = decode_access_token(token)
+    #orgs = list(payload['orgs'].keys())
+    orgs = db.query(UserOrgs.part_of).filter(UserOrgs.user_id == current_user.username).distinct().all()
+    orgs = [i[0] for i in orgs]
+    
 
     # Query events associated with the organizations
-    event_ids_subquery = db.query(Event.id).filter(Event.org_id.in_(orgs)).scalar_subquery()
+    org_events = db.query(Event).filter(Event.org_id.in_(orgs)).all()
 
-    # Query users registered for those events
-    registered_users = db.query(EventAttendee.user_id).filter(EventAttendee.event_id.in_(event_ids_subquery)).all()
+    # Query events where the current user is registered as an attendee
+    user_event_ids = db.query(EventAttendee.event_id).filter(EventAttendee.user_id == current_user.id).distinct().all()
+    user_event_ids = [event_id[0] for event_id in user_event_ids]  # Extracting event IDs from tuples
 
-    return registered_users
+    user_events = db.query(Event).filter(Event.id.in_(user_event_ids)).all()
+
+    # Combine both sets of events and remove duplicates
+    all_events = {event.id: event for event in org_events + user_events}.values()
+    all_events = set(all_events)  # Ensures distinct values
+
+    return list(all_events)
 
 
 def get_event_by_id(db: Session, event_id: str, current_user, token):

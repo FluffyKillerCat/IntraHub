@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Body
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordBearer
 from app.schemas.admin_schema import AdminCreate, AdminOut
@@ -25,7 +25,7 @@ def get_db():
 
 
 @router.post('/', response_model=AdminOut)
-def add_new_admin(db: Session = Depends(get_db),  admin_in = AdminCreate, curr_user = Depends(get_current_user)):
+def add_new_admin(admin_in: AdminCreate = Body(...), db: Session = Depends(get_db), curr_user = Depends(get_current_user)):
     admin = add_admin_to_org(db, admin_in, curr_user)
     return admin
 

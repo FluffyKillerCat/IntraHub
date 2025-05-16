@@ -50,44 +50,39 @@ def add_user_to(token: str, db: Session, user_org_data, admin):
     payload = decode_access_token(token)
 
 
+
     try:
 
 
-        if  payload['orgs'][str(user_org_data.part_of)] is True:
+        if  payload['orgs'][user_org_data.part_of] is True:
 
-            is_org_admin = db.query(Admins).filter(Admins.org_id == user_org_data.org, Admins.user_id == admin.id).first()
+            """ #is_org_admin = db.query(Admins).filter(Admins.org_id == user_org_data.org, Admins.user_id == admin.id).first()
             is_old_user = db.query(UserOrgs).filter(UserOrgs.part_of == user_org_data.part_of, UserOrgs.user_id ==  user_org_data.username)
             if is_old_user:
+                print("OLD")
 
-                raise ValueError(f"User already part of {user_org_data.org}")
-            if is_org_admin:
+                raise ValueError(f"User already part of {user_org_data.org}")"""
+            if 1 == 1:
 
-                return None
+                user  = user_org_data.username
 
+                org = user_org_data.part_of
 
+                new_org_user = UserOrgs(
 
-
-            user  = user_org_data.username
-
-            org = user_org_data.part_of
-
-            new_org_user = UserOrgs(
-
-                user_id=user,
-                part_of=org
-            )
+                    user_id=user,
+                    part_of=org,
+                )
 
 
-            db.add(new_org_user)
-            db.commit()
-            db.refresh(new_org_user)
+                db.add(new_org_user)
+                db.commit()
+                db.refresh(new_org_user)
 
-            return new_org_user
+                return new_org_user
 
 
-        else:
 
-            return None
     except Exception:
         return None
 

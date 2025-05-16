@@ -8,7 +8,7 @@ class UserOrgCreate(BaseModel):
 
 class UserOrgOut(BaseModel):
 
-    user_id: int
+    user_id: str
     part_of: str
     class Config:
         orm_mode: True

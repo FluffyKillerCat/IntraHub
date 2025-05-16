@@ -25,7 +25,7 @@ def create_new_event(event_in: EventCreate, current_user = Depends(get_current_u
 
 @router.get("/", response_model=list[EventOut])
 def list_events(db: Session = Depends(get_db), current_user: UserOut = Depends(get_current_user), token = Depends(oauth2_scheme)):
-    events = get_all_events(db, current_user.id, token)
+    events = get_all_events(db, current_user, token)
 
     return events
 
