@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Gatherly.iml" filepath="$PROJECT_DIR$/.idea/Gatherly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/IntraHub.iml" filepath="$PROJECT_DIR$/.idea/IntraHub.iml" />
     </modules>
   </component>
 </project>
