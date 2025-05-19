@@ -55,4 +55,4 @@ def delete_event(
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
 
-    return delete_event_title(db, event_title, current_user, event, token)
+    return delete_event_title(db, event_title, current_user)
