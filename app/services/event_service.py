@@ -8,14 +8,14 @@ from app.services.token_service import get_current_token
 from app.utilities.jwt import decode_access_token
 def create_event(db: Session, creator_id, event_data, token):
 
-    payload = decode_access_token(token)
+
 
 
     orgs = db.query(UserOrgs.part_of, UserOrgs.is_admin).filter(UserOrgs.user_id == creator_id.username).all()
     orgs = {org[0]: org[1] for org in orgs}
 
     if not any(org[0] == event_data.org_id for org in orgs):
-        raise ValueError("Org not found")
+        raise ValueError(f"{event_data.org_id}")
 
     try:
 

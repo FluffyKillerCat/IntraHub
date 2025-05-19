@@ -10,7 +10,7 @@ USER_NAME = os.getenv("USER_NAME")
 DATABASE_URL = os.getenv("DATABASE_URL")
 # Create database tables
 base.Base.metadata.create_all(bind=session.engine)
-app = FastAPI(title="FastAPI Event Management App")
+app = FastAPI(title="IntraHub API")
 # Include routers
 app.include_router(auth_routes.router, prefix="/auth", tags=["auth"])
 app.include_router(user_routes.router, prefix="/users", tags=["users"])
