@@ -15,8 +15,8 @@ def create_event(db: Session, creator_id, event_data, token):
     orgs = {org[0]: org[1] for org in orgs}
 
 
-    if not any(org[0] == event_data.org_id for org in orgs):
-        raise ValueError(f"{orgs}")
+    if not any(org == event_data.org_id for org in orgs):
+        raise ValueError(f"User is not an admin in {event_data.org_id}")
 
     try:
 
