@@ -19,12 +19,12 @@ def get_db():
 
 @router.post("/", response_model=AttendeeOut)
 def register_attendee(attendee_in: AttendeeCreate, current_user = Depends(get_current_user), db: Session = Depends(get_db), token = Depends(oauth2_scheme)):
-    payload = decode_access_token(token)
+
 
     event_count = db.query(Event.max_attendees).filter(Event.title == attendee_in.event_title).scalar()
 
     if not event_count:
-        raise HTTPException(status_code=404, detail="Event not found")
+        raise HTTPException(status_code=404, detail="MAX attendees already reached")
     event_id = db.query(Event.id).filter(Event.title == attendee_in.event_title).scalar()
     a_ud = db.query(User.id).filter(User.username == attendee_in.user_id).scalar()
     attendee = EventAttendee(

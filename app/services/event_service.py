@@ -75,10 +75,11 @@ def get_all_events(db: Session, current_user, token):
 
 
 def get_event_by_id(db: Session, event_id: str, current_user, token):
-    payload = decode_access_token(token)
+    orgs = db.query(UserOrgs.part_of).filter(UserOrgs.user_id == current_user.username).distinct().all()
+    orgs = [i[0] for i in orgs]
 
 
-    for org in payload['orgs']:
+    for org in orgs:
         event = db.query(Event).filter(Event.title == event_id, Event.org_id == org).first()
         if event:
             return event
@@ -87,7 +88,7 @@ def get_event_by_id(db: Session, event_id: str, current_user, token):
 def delete_event_title(db: Session, event_id: str, current_user, event, token):
     payload = decode_access_token(token)
 
-    db.delete(event)
+    db.delete(event_id)
     db.commit()
     return event
 
