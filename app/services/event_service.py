@@ -74,15 +74,14 @@ def get_all_events(db: Session, current_user, token):
     return list(all_events)
 
 
-def get_event_by_id(db: Session, event_id: str, current_user, token):
+def get_event_by_id(db: Session, event_id: int, current_user, token):
     orgs = db.query(UserOrgs.part_of).filter(UserOrgs.user_id == current_user.username).distinct().all()
     orgs = [i[0] for i in orgs]
 
+    event = db.query(Event).filter(Event.title == event_id, Event.org_id.in_(orgs)).first()
 
-    for org in orgs:
-        event = db.query(Event).filter(Event.title == event_id, Event.org_id == org).first()
-        if event:
-            return event
+    return event
+
 
 
 def delete_event_title(db: Session, event_id: str, current_user, event, token):
