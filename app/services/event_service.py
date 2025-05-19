@@ -14,8 +14,9 @@ def create_event(db: Session, creator_id, event_data, token):
     orgs = db.query(UserOrgs.part_of, UserOrgs.is_admin).filter(UserOrgs.user_id == creator_id.username).all()
     orgs = {org[0]: org[1] for org in orgs}
 
+
     if not any(org[0] == event_data.org_id for org in orgs):
-        raise ValueError(f"{event_data.org_id}")
+        raise ValueError(f"{orgs}")
 
     try:
 
