@@ -96,5 +96,5 @@ def delete_event_title(db: Session, event_title: str, current_user):
 
     db.delete(event)
     db.commit()
-    return event
+    return {"message": "Event deleted successfully"}
 

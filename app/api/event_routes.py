@@ -42,7 +42,7 @@ def get_event(event_title: str, db: Session = Depends(get_db), current_user: Use
 from app.models.event import Event  # Import your Event model
 from app.services.event_service import get_event_by_id  # Assuming you have this helper
 
-@router.delete("/{event_title}",  response_model=EventOut)
+@router.delete("/{event_title}")
 def delete_event(
     event_title: str,
     db: Session = Depends(get_db),
