@@ -31,6 +31,10 @@ class EventCreate(BaseModel):
 class EventOut(BaseModel):
 
     title: str
+    event_date: date
+    start_time: time
+    end_time: time
+
 
 
 
