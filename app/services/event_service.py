@@ -83,7 +83,7 @@ def get_event_by_id(db: Session, event_id: str, current_user, token):
     return event
 
 
-def delete_event_title(db: Session, event_title: str, current_user, token):
+def delete_event_title(db: Session, event_title: str, current_user):
     # Get organizations the user belongs to
     orgs = db.query(UserOrgs.part_of).filter(UserOrgs.user_id == current_user.username).distinct().all()
     orgs = [i[0] for i in orgs]
