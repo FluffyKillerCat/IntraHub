@@ -83,18 +83,25 @@ def get_event_by_id(db: Session, event_id: str, current_user, token):
     return event
 
 
-
-def delete_event_title(db: Session, event_title: str, current_user):
+def delete_event_title(db: Session, event_title: str, current_user, token):
+    # Get organizations the user belongs to
     orgs = db.query(UserOrgs.part_of).filter(UserOrgs.user_id == current_user.username).distinct().all()
     orgs = [i[0] for i in orgs]
 
-    event_id = db.query(Event.id).filter(Event.title == event_title, Event.org_id.in_(orgs)).scalar()
-    event = db.query(Event.id).filter(Event.title == event_title, Event.org_id.in_(orgs)).first()
-    db.query(EventAttendee).filter(EventAttendee.event_id == event_id).delete()
+    # Fetch the event properly as an ORM instance
+    event = db.query(Event).filter(Event.title == event_title, Event.org_id.in_(orgs)).first()
+
     if not event:
         return {"error": "Event not found"}
 
+    # Delete related attendees first
+    db.query(EventAttendee).filter(EventAttendee.event_id == event.id).delete(synchronize_session=False)
+
+    # Delete the event instance
     db.delete(event)
     db.commit()
+
     return {"message": "Event deleted successfully"}
+
+
 
