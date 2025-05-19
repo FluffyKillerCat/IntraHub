@@ -88,8 +88,9 @@ def delete_event_title(db: Session, event_title: str, current_user):
     orgs = db.query(UserOrgs.part_of).filter(UserOrgs.user_id == current_user.username).distinct().all()
     orgs = [i[0] for i in orgs]
 
-    event = db.query(Event).filter(Event.title == event_title, Event.org_id.in_(orgs)).first()
-
+    event_id = db.query(Event.id).filter(Event.title == event_title, Event.org_id.in_(orgs)).scalar()
+    event = db.query(Event.id).filter(Event.title == event_title, Event.org_id.in_(orgs)).first()
+    db.query(EventAttendee).filter(EventAttendee.event_id == event_id).delete()
     if not event:
         return {"error": "Event not found"}
 
