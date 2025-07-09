@@ -28,4 +28,9 @@ router = APIRouter()
 @router.post('/', response_model=AdminOut)
 def add_new_admin(admin_in: AdminCreate = Body(...), db: Session = Depends(get_db), curr_user = Depends(get_current_user)):
     admin = add_admin_to_org(db, admin_in, curr_user)
+    if not admin:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid credentials!!!"
+        )
     return admin

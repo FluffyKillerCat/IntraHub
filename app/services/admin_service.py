@@ -10,7 +10,7 @@ def add_admin_to_org(db: Session, userdata, curr_admin):
     uid = db.query(User.id).filter(User.username == userdata.user_id).scalar()
 
 
-    if is_curr_admin_allowed:
+    if is_curr_admin_allowed and uid:
         new_admins = Admins(
 
             user_id= uid,
