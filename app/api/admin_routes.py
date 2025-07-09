@@ -6,7 +6,7 @@ from app.services.admin_service import add_admin_to_org
 from app.utilities.jwt import decode_access_token
 from app.db.session import SessionLocal
 from app.api.user_routes import get_current_user
-
+from app.db.database import get_db
 
 
 
@@ -15,12 +15,12 @@ router = APIRouter()
 
 
 # Dependency to get database session
-def get_db():
+"""def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
-        db.close()
+        db.close()"""
 
 
 # In your route file:

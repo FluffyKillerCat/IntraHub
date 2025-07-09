@@ -1,54 +1,35 @@
-# test_admin_routes.py
 from app.tests.testconfig import TestingSessionLocal, engine
 from app.models.user import User
+from app.models.admins import Admins
+
 from app.utilities.jwt import generate_access_token as create_access_token
 from app.db.base import Base
-# --- Test /me route ---
-def test_me_route(client):
-    Base.metadata.create_all(bind=engine)
+
+
+def test_new_admin_route(client):
+
     db = TestingSessionLocal()
-    test_user = User(username="alice", email="alicee@example.com", password="fakeJ1291dqk182jdqw")
-    db.add(test_user)
+
+    admin_user = User(username="alice1", email="alic1ee11@example.com", password="fakeJ1291dqk182jdqw")
+    db.add(admin_user)
     db.commit()
-    db.refresh(test_user)
+    db.refresh(admin_user)
+
+    new_admin = User(username="bob1", email="alic111e11e@example.com", password="fakeJ1291dqk182jdqw")
+    db.add(new_admin)
+    db.commit()
+    db.refresh(new_admin)
+
+
+    org_admin = Admins(user_id=1, org_id="org_123", accepted_by="me")
+
+    db.add(org_admin)
+    db.commit()
+    db.refresh(org_admin)
     db.close()
 
-    token = create_access_token({"sub": "alice"})
-
-    response = client.get("/users/me/", headers={"Authorization": f"Bearer {token}"})
-
+    token = create_access_token({"sub": "alice1"})
+    response = client.post("/admins/", headers={"Authorization": f"Bearer {token}"}, json={"org_id": "org_123", "user_id": "bob1"})
     assert response.status_code == 200
-    assert response.json()["username"] == "alice"
-
-
-# --- Test DELETE user (authorized) ---
-def test_delete_user_success(client):
-    db = TestingSessionLocal()
-    test_user = User(username="bob", email="bob@example.com", password="123")
-    db.add(test_user)
-    db.commit()
-    db.refresh(test_user)
-    db.close()
-
-    token = create_access_token({"sub": "bob"})
-    response = client.delete("/users/users/bob", headers={"Authorization": f"Bearer {token}"})
-    assert response.status_code == 204
-
-# --- Test DELETE user (forbidden) ---
-"""def test_delete_user_forbidden(client):
-    db = TestingSessionLocal()
-    db.add_all([
-        User(username="john", email="john@example.com", password="123"),
-        User(username="doe", email="doe@example.com", password="123")
-    ])
-    db.commit()
-    db.close()
-
-    token = create_access_token({"sub": "john"})
-    response = client.delete("/users/doe", headers={"Authorization": f"Bearer {token}"})
-
-    assert response.status_code == 403"""
-
-# --- Cleanup after module ---
-"""def teardown_module(module):
-    Base.metadata.drop_all(bind=engine)"""
+    assert response.json()["user_id"] == 2
+    assert response.json()["org_id"] == "org_123"
