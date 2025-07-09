@@ -2,11 +2,10 @@
 import pytest
 import os
 from fastapi.testclient import TestClient
-from main import app
+from app.main import app
 from app.db.database import get_db
 from app.tests.testconfig import TestingSessionLocal, engine
 import app.api.user_routes as user_routes
-from app.models.user import User
 from app.db.base import Base
 # ✅ Dependency override
 def override_get_db():

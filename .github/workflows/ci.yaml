@@ -39,8 +39,9 @@ jobs:
       - name: Run Alembic migrations
         run: alembic upgrade head
 
-      - name: Set PYTHONPATH for GitHub Actions
-        run: echo "PYTHONPATH=$GITHUB_WORKSPACE/IntraHub" >> $GITHUB_ENV
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+
 
       - name: Run tests
         run: pytest --cov=app app/tests/
