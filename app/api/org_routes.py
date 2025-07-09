@@ -41,7 +41,3 @@ def add_user_to_org(user_in: UserOrgCreate, db: Session = Depends(get_db), curr_
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"{e}"
         )
-
-
-
-

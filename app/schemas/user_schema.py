@@ -37,4 +37,3 @@ class Token(BaseModel):
 
 class RToken(BaseModel):
     refresh_token: str
-

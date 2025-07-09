@@ -40,4 +40,3 @@ def register_attendee(attendee_in: AttendeeCreate, current_user = Depends(get_cu
         return attendee
     else:
         raise HTTPException(status_code=401, detail="Event Full!!!")
-

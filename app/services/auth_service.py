@@ -55,9 +55,3 @@ def generate_rtoken_for_user(user, db):
         data=data, expires_delta=access_token_expires
     )
     return token
-
-
-
-
-
-

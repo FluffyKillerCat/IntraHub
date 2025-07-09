@@ -8,4 +8,3 @@ class Organizations(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     created_id = Column(String, ForeignKey("users.username", ondelete="SET NULL"), nullable=True)  # Allow NULL to avoid circular issues
     org_name = Column(String(50), nullable=False, unique=True, comment="e.g., organization name")
-

@@ -5,18 +5,13 @@ from app.schemas.user_schema import UserOut
 from app.services.auth_service import get_user_by_username
 from app.utilities.jwt import decode_access_token
 from app.db.session import SessionLocal
+from app.db.database import get_db
 
 router = APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 
 # Dependency to get database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 # Dependency to get the current user
@@ -38,6 +33,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         )
 
     # Fetch user from database using their username (from payload)
+
     user = get_user_by_username(db, payload["sub"])
     if not user:
         raise HTTPException(

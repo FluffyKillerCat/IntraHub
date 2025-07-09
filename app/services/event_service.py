@@ -56,7 +56,7 @@ def get_all_events(db: Session, current_user, token):
     #orgs = list(payload['orgs'].keys())
     orgs = db.query(UserOrgs.part_of).filter(UserOrgs.user_id == current_user.username).distinct().all()
     orgs = [i[0] for i in orgs]
-    
+
 
     # Query events associated with the organizations
     org_events = db.query(Event).filter(Event.org_id.in_(orgs)).all()
@@ -102,6 +102,3 @@ def delete_event_title(db: Session, event_title: str, current_user):
     db.commit()
 
     return {"message": "Event deleted successfully"}
-
-
-

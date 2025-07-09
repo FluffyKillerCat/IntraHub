@@ -12,4 +12,3 @@ class UserOrgs(Base):
     part_of = Column(String, ForeignKey('organizations.org_name'), nullable=True)
     is_admin = Column(Boolean, default=False)
     date_joined = Column(DateTime, default=datetime.utcnow)
-

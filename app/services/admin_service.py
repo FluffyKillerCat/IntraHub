@@ -8,7 +8,8 @@ def add_admin_to_org(db: Session, userdata, curr_admin):
 
     is_curr_admin_allowed = db.query(Admins).filter(Admins.user_id == curr_admin.id, Admins.org_id == userdata.org_id).first()
     uid = db.query(User.id).filter(User.username == userdata.user_id).scalar()
-    print(curr_admin.username, userdata.org_id)
+
+
     if is_curr_admin_allowed:
         new_admins = Admins(
 
@@ -33,10 +34,5 @@ def add_admin_to_org(db: Session, userdata, curr_admin):
         db.refresh(new_org_user)
         return new_admins
     else:
+        print("*" * 100)
         return None
-
-
-
-
-
-

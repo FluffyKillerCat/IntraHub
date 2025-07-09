@@ -1,0 +1,5 @@
+[run]
+source = app
+omit =
+    app/db/migrations/*
+    app/__init__.py

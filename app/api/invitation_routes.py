@@ -33,4 +33,3 @@ def create_invitation(invite_in: InvitationCreate, current_user = Depends(get_cu
     db.refresh(invitation)
 
     return invitation
-

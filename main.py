@@ -22,5 +22,3 @@ app.include_router(speaker_routes.router, prefix="/speakers", tags=["speakers"])
 app.include_router(admin_routes.router, prefix="/admins", tags=["admins"])
 
 app.include_router(org_routes.router, prefix="/orgs", tags=["orgs"])
-
-

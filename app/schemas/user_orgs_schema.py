@@ -12,5 +12,3 @@ class UserOrgOut(BaseModel):
     part_of: str
     class Config:
         orm_mode: True
-
-

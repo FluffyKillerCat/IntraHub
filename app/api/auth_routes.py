@@ -76,6 +76,3 @@ def refresh_access_token(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Token refresh failed: {e}"
         )
-
-
-

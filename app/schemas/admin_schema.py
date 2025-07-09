@@ -15,7 +15,3 @@ class AdminOut(BaseModel):
     class Config:
 
         orm_mode = True
-
-
-
-

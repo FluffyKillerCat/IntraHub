@@ -23,9 +23,9 @@ def get_db():
         db.close()
 
 
+# In your route file:
 
 @router.post('/', response_model=AdminOut)
 def add_new_admin(admin_in: AdminCreate = Body(...), db: Session = Depends(get_db), curr_user = Depends(get_current_user)):
     admin = add_admin_to_org(db, admin_in, curr_user)
     return admin
-

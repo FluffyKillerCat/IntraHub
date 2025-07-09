@@ -85,5 +85,3 @@ def add_user_to(token: str, db: Session, user_org_data, admin):
 
     except Exception:
         return None
-
-
