@@ -41,3 +41,5 @@ jobs:
 
       - name: Run tests
         run: pytest --cov=app tests/
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE/IntraHub" >> $GITHUB_ENV
